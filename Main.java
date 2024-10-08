@@ -11,7 +11,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int x_first = n.getIntInput("введите число, знаков не менее 2: ");
         int res_first = n.sumLastNums(x_first);
-        System.out.println("сумма 2 последних чисел = " + res_first);
+        System.out.println("сумма 2 последних цифр = " + res_first);
 
         int x_second = n.getIntInput("введите число: ");
         boolean res_second = n.isPositive(x_second);
@@ -73,8 +73,11 @@ public class Main {
         System.out.println(n.equalNum(x_13));
 
         int x_14 = n.getIntInput("введите число: ");
-        System.out.println("левый треугольник:");
-        n.leftTriangle(x_14);
+        if (x_14 < 0)
+            System.out.println("число меньше 0, пирамиды не будет");
+        else {
+            System.out.println("левый треугольник:");
+            n.leftTriangle(x_14); }
 
         n.guessGame();
 
@@ -130,6 +133,7 @@ public class Main {
     }
 
     public int sumLastNums (int x) {
+        if (x%10 + x/10%10 < 0) return -(x%10 + x/10%10);
         return x%10 + x/10%10;
     }
 
@@ -286,10 +290,10 @@ public class Main {
     }
 
     public void reverse(int[] arr) {
-//        if (arr == null || arr.length == 0) {
-//            System.out.println("Массив пуст или null");
-//            return;
-//        }
+        if (arr == null || arr.length == 0) {
+            System.out.println("Массив пуст или null");
+            return;
+        }
 
         for (int i = 0; i < arr.length / 2; i++) {
             int temp = arr[i];
@@ -316,8 +320,6 @@ public class Main {
             return new int[0];  // Возвращаем пустой массив
         }
 
-        return Arrays.stream(arr)
-                .filter(n -> n >= 0)
-                .toArray();
+        return Arrays.stream(arr).filter(n -> n >= 0).toArray();
     }
 }
